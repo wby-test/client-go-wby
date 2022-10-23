@@ -1,20 +1,22 @@
 package cluster
 
 import (
+	"log"
+
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 )
 
 func NewClusterClient() *kubernetes.Clientset {
-
-	config, err := clientcmd.BuildConfigFromFlags("", "/Users/wangbaoyi1/.kube/config")
+	config, err := clientcmd.BuildConfigFromFlags("", "/Users/wby/.kube/config")
 	if err != nil {
-		panic(err)
-	}
-	client, err := kubernetes.NewForConfig(config)
-	if err != nil {
-		panic(err)
+		log.Fatalln("get cluster config error")
 	}
 
-	return client
+	clientSet, err := kubernetes.NewForConfig(config)
+	if err != nil {
+		log.Fatalln("init cluster client error")
+	}
+
+	return clientSet
 }

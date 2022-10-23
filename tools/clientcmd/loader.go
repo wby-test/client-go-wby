@@ -80,6 +80,7 @@ type ClientConfigGetter struct {
 }
 
 // ClientConfigGetter implements the ClientConfigLoader interface.
+// TODO: 这里申请个无用变量什么作用？
 var _ ClientConfigLoader = &ClientConfigGetter{}
 
 func (g *ClientConfigGetter) Load() (*clientcmdapi.Config, error) {
@@ -239,6 +240,7 @@ func (rules *ClientConfigLoadingRules) Load() (*clientcmdapi.Config, error) {
 
 	// since values are overwritten, but maps values are not, we can merge the non-map config on top of the map config and
 	// get the values we expect.
+	// TODO: 合并多集群配置
 	config := clientcmdapi.NewConfig()
 	mergo.Merge(config, mapConfig, mergo.WithOverride)
 	mergo.Merge(config, nonMapConfig, mergo.WithOverride)
@@ -361,6 +363,7 @@ func (rules *ClientConfigLoadingRules) IsDefaultConfig(config *restclient.Config
 }
 
 // LoadFromFile takes a filename and deserializes the contents into Config object
+// client-go中对Load的调用只在该处使用了。
 func LoadFromFile(filename string) (*clientcmdapi.Config, error) {
 	kubeconfigBytes, err := os.ReadFile(filename)
 	if err != nil {
@@ -407,6 +410,8 @@ func Load(data []byte) (*clientcmdapi.Config, error) {
 	if len(data) == 0 {
 		return config, nil
 	}
+
+	//  serializer/versioning.go
 	decoded, _, err := clientcmdlatest.Codec.Decode(data, &schema.GroupVersionKind{Version: clientcmdlatest.Version, Kind: "Config"}, config)
 	if err != nil {
 		return nil, err

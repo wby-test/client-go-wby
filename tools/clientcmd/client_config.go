@@ -106,6 +106,7 @@ func NewInteractiveClientConfig(config clientcmdapi.Config, contextName string, 
 }
 
 // NewClientConfigFromBytes takes your kubeconfig and gives you back a ClientConfig
+// 该处在client-go中并没有使用，是否有其他k8s相关库进行了使用
 func NewClientConfigFromBytes(configBytes []byte) (ClientConfig, error) {
 	config, err := Load(configBytes)
 	if err != nil {
