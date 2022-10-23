@@ -15,7 +15,8 @@ import (
 func main() {
 	listNode()
 	listPods("public-resource")
-	unMarshalPodJson("/Users/wby/code/cncf/k8s/client-go-wby/examples/rest-api/api/test.json")
+	listJobs("public-resource")
+	//unMarshalPodJson("/Users/wby/code/cncf/k8s/client-go-wby/examples/rest-api/api/test.json")
 }
 
 func listNode() {
@@ -48,6 +49,24 @@ func listPods(ns string) {
 
 		fmt.Println(v.GetName())
 		fmt.Println(v.Status.Phase)
+	}
+}
+
+func listJobs(ns string) {
+	client := cluster.NewClusterClient()
+	list, err := client.BatchV1().Jobs(ns).List(context.Background(), v1.ListOptions{})
+
+	if err != nil {
+		log.Fatalln("get jobs list error: ", list)
+	}
+
+	for _, v := range list.Items {
+		if v.GetName() == "svc-save-all-to-last-model-235-7223-1665739120356" {
+			b, _ := json.Marshal(v)
+			fmt.Println(b)
+		}
+
+		fmt.Println(v.GetName(), " ", v.Annotations)
 	}
 }
 
