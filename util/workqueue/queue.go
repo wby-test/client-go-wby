@@ -166,6 +166,7 @@ func (q *Type) Get() (item interface{}, shutdown bool) {
 	q.queue[0] = nil
 	q.queue = q.queue[1:]
 
+	// TODO: why use metrics
 	q.metrics.get(item)
 
 	q.processing.insert(item)

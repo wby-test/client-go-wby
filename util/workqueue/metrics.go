@@ -25,6 +25,7 @@ import (
 
 // This file provides abstractions for setting the provider (e.g., prometheus)
 // of metrics.
+// TODO: how to use metrics, why?
 
 type queueMetrics interface {
 	add(item t)
