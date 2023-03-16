@@ -109,6 +109,8 @@ type waitFor struct {
 // it has been removed from the queue and placed at index Len()-1 by
 // container/heap. Push adds an item at index Len(), and container/heap
 // percolates it into the correct location.
+// 使用 heap.Interface go 标准库的堆结构作为优先队列。队列中存储 waitFor 结构的数据，
+// 当当前时间戳到达设置时间后，添加入延迟队列 delayingType 中。
 type waitForPriorityQueue []*waitFor
 
 func (pq waitForPriorityQueue) Len() int {

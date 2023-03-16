@@ -327,6 +327,7 @@ func TestQueueDrainageUsingShutDownWithDrainWithDirtyItem(t *testing.T) {
 
 // TestGarbageCollection ensures that objects that are added then removed from the queue are
 // able to be garbage collected.
+// TODO: 如何测试垃圾回收 runtime.GC
 func TestGarbageCollection(t *testing.T) {
 	type bigObject struct {
 		data []byte
