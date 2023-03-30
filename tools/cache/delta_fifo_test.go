@@ -35,6 +35,7 @@ func testPop(f *DeltaFIFO) testFifoObject {
 // The function must list the same objects every time.
 type literalListerGetter func() []testFifoObject
 
+// 这样做的目的是为了检查 literalListerGetter 类型是否实现了 KeyListerGetter 接口。
 var _ KeyListerGetter = literalListerGetter(nil)
 
 // ListKeys just calls kl.

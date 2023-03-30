@@ -48,6 +48,7 @@ func TestFIFO_basic(t *testing.T) {
 	go func() {
 		for u := uint64(0); u < amount; u++ {
 			f.Add(mkFifoObj(string([]rune{'b', rune(u)}), u+1))
+			fmt.Println(string([]rune{'b', rune(u)}))
 		}
 	}()
 
