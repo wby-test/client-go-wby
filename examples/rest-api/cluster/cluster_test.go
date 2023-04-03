@@ -6,6 +6,6 @@ import (
 )
 
 func TestGetConfigFile(t *testing.T) {
-	out := GetConfigFile("kubetest")
+	out := GetConfigFile("tes")
 	fmt.Println(out)
 }
